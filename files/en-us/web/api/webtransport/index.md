@@ -69,6 +69,12 @@ Within a `try...catch` block it uses `await` to wait for the `closed` promise to
 
 ```js
 async function closeTransport(transport) {
+  try {
+     transport.close();
+  } catch (error) {
+      console.error(`The HTTP/3 connection to ${url} was not closed because it is connecting`);
+  }
+
   // Respond to connection closing
   try {
     await transport.closed;
